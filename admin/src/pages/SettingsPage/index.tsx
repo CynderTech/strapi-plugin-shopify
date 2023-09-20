@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 import {
@@ -10,10 +10,31 @@ import {
 	Main,
 	TextInput,
 } from '@strapi/design-system';
+import { useFetchClient, useNotification } from '@strapi/helper-plugin';
+import { useMutation } from '@tanstack/react-query';
 import { isEmpty } from 'lodash';
 
 const SettingsPage = () => {
 	const [content, setContent] = useState('');
+
+	const { get, put } = useFetchClient();
+	const toggleNotification = useNotification();
+
+	const mutation = useMutation({
+		mutationFn: (newSettings: { accessToken: String }) =>
+			put('/shopify/settings', newSettings),
+		onSuccess: () =>
+			toggleNotification({
+				type: 'success',
+				message: { defaultMessage: 'Saved' },
+			}),
+	});
+
+	useEffect(() => {
+		get('/shopify/settings').then(({ data }) =>
+			setContent(data?.settings?.accessToken),
+		);
+	}, [setContent]);
 
 	return (
 		<Main>
@@ -21,7 +42,14 @@ const SettingsPage = () => {
 
 			<HeaderLayout
 				primaryAction={
-					<Button disabled={isEmpty(content)}>Save</Button>
+					<Button
+						disabled={isEmpty(content)}
+						onClick={() => {
+							mutation.mutate({ accessToken: content });
+						}}
+					>
+						Save
+					</Button>
 				}
 				title="Shopify"
 			/>

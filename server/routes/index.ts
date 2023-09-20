@@ -1,8 +1,17 @@
 export default [
   {
     method: 'GET',
-    path: '/',
-    handler: 'myController.index',
+    path: '/settings',
+    handler: 'settings.getSettings',
+    config: {
+      policies: [],
+      auth: false,
+    },
+  },
+  {
+    method: 'PUT',
+    path: '/settings',
+    handler: 'settings.updateSettings',
     config: {
       policies: [],
     },

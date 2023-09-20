@@ -34,7 +34,7 @@ export default {
 					to: `/settings/${pluginId}`,
 					async Component() {
 						const component = await import(
-							/* webpackChunkName: "email-settings-page" */ './pages/SettingsPage'
+							/* webpackChunkName: "email-settings-page" */ './components/SettingsWrapper'
 						);
 
 						return component;
