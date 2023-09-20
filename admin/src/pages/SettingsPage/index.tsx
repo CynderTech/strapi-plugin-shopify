@@ -12,7 +12,7 @@ import {
 } from '@strapi/design-system';
 import { isEmpty } from 'lodash';
 
-const HomePage = () => {
+const SettingsPage = () => {
 	const [content, setContent] = useState('');
 
 	return (
@@ -42,4 +42,4 @@ const HomePage = () => {
 	);
 };
 
-export default HomePage;
+export default SettingsPage;
