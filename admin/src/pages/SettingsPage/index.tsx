@@ -21,19 +21,21 @@ const SettingsPage = () => {
 	const toggleNotification = useNotification();
 
 	const mutation = useMutation({
-		mutationFn: (newSettings: { accessToken: String }) =>
-			put('/shopify/settings', newSettings),
-		onSuccess: () =>
+		mutationFn: async (newSettings: { accessToken: String }) => {
+			await put('/shopify/settings', newSettings);
+		},
+		onSuccess: () => {
 			toggleNotification({
 				type: 'success',
 				message: { defaultMessage: 'Saved' },
-			}),
+			});
+		},
 	});
 
 	useEffect(() => {
-		get('/shopify/settings').then(({ data }) =>
-			setContent(data?.settings?.accessToken),
-		);
+		get('/shopify/settings').then(({ data }) => {
+			setContent(data?.settings?.accessToken);
+		});
 	}, [setContent]);
 
 	return (

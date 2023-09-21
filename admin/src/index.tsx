@@ -1,10 +1,11 @@
+/* eslint-disable import/extensions */
 import { prefixPluginTranslations } from '@strapi/helper-plugin';
 
 import pluginPkg from '../../package.json';
 import pluginId from './pluginId';
 import Initializer from './components/Initializer';
 
-const name = pluginPkg.strapi.name;
+const { name } = pluginPkg.strapi;
 
 export default {
 	register(app: any) {
@@ -46,27 +47,27 @@ export default {
 		app.registerPlugin(plugin);
 	},
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	bootstrap(app: any) {},
 
 	async registerTrads(app: any) {
 		const { locales } = app;
 
 		const importedTrads = await Promise.all(
-			(locales as any[]).map((locale) => {
-				return import(`./translations/${locale}.json`)
-					.then(({ default: data }) => {
-						return {
+			(locales as any[]).map(
+				(locale) =>
+					// eslint-disable-next-line implicit-arrow-linebreak
+					import(`./translations/${locale}.json`)
+						.then(({ default: data }) => ({
 							data: prefixPluginTranslations(data, pluginId),
 							locale,
-						};
-					})
-					.catch(() => {
-						return {
+						}))
+						.catch(() => ({
 							data: {},
 							locale,
-						};
-					});
-			}),
+						})),
+				// eslint-disable-next-line function-paren-newline
+			),
 		);
 
 		return Promise.resolve(importedTrads);
