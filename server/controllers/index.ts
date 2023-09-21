@@ -1,5 +1,7 @@
 import settings from './settings';
+import products from './products';
 
 export default {
-  settings,
+	products,
+	settings,
 };

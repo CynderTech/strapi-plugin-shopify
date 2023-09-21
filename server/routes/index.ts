@@ -1,18 +1,7 @@
-export default [
-	{
-		method: 'GET',
-		path: '/settings',
-		handler: 'settings.getSettings',
-		config: {
-			policies: [],
-		},
-	},
-	{
-		method: 'PUT',
-		path: '/settings',
-		handler: 'settings.updateSettings',
-		config: {
-			policies: [],
-		},
-	},
-];
+import admin from './admin';
+import contentApi from './content-api';
+
+export default {
+	admin,
+	'content-api': contentApi,
+};

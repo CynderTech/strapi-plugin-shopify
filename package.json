@@ -14,8 +14,10 @@
     "@strapi/icons": "^1.6.3",
     "@strapi/utils": "^4.13.6",
     "@tanstack/react-query": "^4.35.3",
+    "axios": "^1.5.0",
     "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
+    "qs": "^6.11.2",
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
