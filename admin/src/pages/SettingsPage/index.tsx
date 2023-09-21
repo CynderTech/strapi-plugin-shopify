@@ -15,13 +15,17 @@ import { useMutation } from '@tanstack/react-query';
 import { isEmpty } from 'lodash';
 
 const SettingsPage = () => {
-	const [content, setContent] = useState('');
+	const [baseUrl, setBaseUrl] = useState('');
+	const [accessToken, setAccessToken] = useState('');
 
 	const { get, put } = useFetchClient();
 	const toggleNotification = useNotification();
 
 	const mutation = useMutation({
-		mutationFn: async (newSettings: { accessToken: String }) => {
+		mutationFn: async (newSettings: {
+			accessToken: String;
+			baseUrl: String;
+		}) => {
 			await put('/shopify/settings', newSettings);
 		},
 		onSuccess: () => {
@@ -34,9 +38,10 @@ const SettingsPage = () => {
 
 	useEffect(() => {
 		get('/shopify/settings').then(({ data }) => {
-			setContent(data?.settings?.accessToken);
+			setBaseUrl(data?.settings?.baseUrl);
+			setAccessToken(data?.settings?.accessToken);
 		});
-	}, [setContent]);
+	}, [setAccessToken, setBaseUrl]);
 
 	return (
 		<Main>
@@ -45,9 +50,9 @@ const SettingsPage = () => {
 			<HeaderLayout
 				primaryAction={
 					<Button
-						disabled={isEmpty(content)}
+						disabled={isEmpty(baseUrl) || isEmpty(accessToken)}
 						onClick={() => {
-							mutation.mutate({ accessToken: content });
+							mutation.mutate({ baseUrl, accessToken });
 						}}
 					>
 						Save
@@ -57,12 +62,23 @@ const SettingsPage = () => {
 			/>
 			<ContentLayout>
 				<GridLayout>
-					<Box>
+					<Box padding={4}>
+						<TextInput
+							label="Base URL"
+							name="baseUrl"
+							onChange={(e) => setBaseUrl(e.target.value)}
+							value={baseUrl}
+						/>
+					</Box>
+					<Box />
+				</GridLayout>
+				<GridLayout>
+					<Box padding={4}>
 						<TextInput
 							label="Access Token"
 							name="accessToken"
-							onChange={(e) => setContent(e.target.value)}
-							value={content}
+							onChange={(e) => setAccessToken(e.target.value)}
+							value={accessToken}
 						/>
 					</Box>
 					<Box />
