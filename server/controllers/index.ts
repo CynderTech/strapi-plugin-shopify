@@ -1,5 +1,7 @@
-import myController from './my-controller';
+import settings from './settings';
+import products from './products';
 
 export default {
-  myController,
+	products,
+	settings,
 };

@@ -1,19 +1,45 @@
-/*
- *
- * HomePage
- *
- */
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 
-import React from 'react';
-import pluginId from '../../pluginId';
+import {
+	Box,
+	Button,
+	ContentLayout,
+	GridLayout,
+	HeaderLayout,
+	Main,
+	TextInput,
+} from '@strapi/design-system';
+import { isEmpty } from 'lodash';
 
 const HomePage = () => {
-  return (
-    <div>
-      <h1>{pluginId}&apos;s HomePage</h1>
-      <p>Happy coding</p>
-    </div>
-  );
+	const [content, setContent] = useState('');
+
+	return (
+		<Main>
+			<Helmet title="Shopify" />
+
+			<HeaderLayout
+				primaryAction={
+					<Button disabled={isEmpty(content)}>Save</Button>
+				}
+				title="Shopify"
+			/>
+			<ContentLayout>
+				<GridLayout>
+					<Box>
+						<TextInput
+							label="Access Token"
+							name="accessToken"
+							onChange={(e) => setContent(e.target.value)}
+							value={content}
+						/>
+					</Box>
+					<Box />
+				</GridLayout>
+			</ContentLayout>
+		</Main>
+	);
 };
 
 export default HomePage;
