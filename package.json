@@ -66,6 +66,7 @@
     "npm": ">=6.0.0"
   },
   "scripts": {
+    "postinstall": "npm run build",
     "develop": "tsc -p tsconfig.server.json -w",
     "lint": "npm run lint:admin",
     "lint:admin": "eslint --ext .ts,.tsx admin",
