@@ -4,7 +4,7 @@ export default {
 		{
 			method: 'GET',
 			path: '/products',
-			handler: 'products.find',
+			handler: 'product.find',
 			config: {
 				policies: [],
 			},
