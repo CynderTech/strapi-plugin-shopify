@@ -17,5 +17,29 @@ export default {
 				policies: [],
 			},
 		},
+		{
+			method: 'GET',
+			path: '/cart',
+			handler: 'cart.findOne',
+			config: {
+				policies: [],
+			},
+		},
+		{
+			method: 'PUT',
+			path: '/cart',
+			handler: 'cart.upsert',
+			config: {
+				policies: [],
+			},
+		},
+		{
+			method: 'PUT',
+			path: '/cart/checkout',
+			handler: 'cart.checkout',
+			config: {
+				policies: [],
+			},
+		},
 	],
 };

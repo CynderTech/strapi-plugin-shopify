@@ -7,7 +7,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
 		const { products } = await strapi
 			.plugin('shopify')
 			.service('admin')
-			.retrieveProducts();
+			.retrieveProducts(ctx);
 
 		ctx.send(products);
 	},
