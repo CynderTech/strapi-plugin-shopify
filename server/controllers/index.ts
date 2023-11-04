@@ -1,7 +1,11 @@
+import cart from './cart';
+import order from './order';
+import product from './product';
 import settings from './settings';
-import products from './products';
 
 export default {
-	products,
+	cart,
+	order,
+	product,
 	settings,
 };
