@@ -9,5 +9,13 @@ export default {
 				policies: [],
 			},
 		},
+		{
+			method: 'GET',
+			path: '/orders',
+			handler: 'order.find',
+			config: {
+				policies: [],
+			},
+		},
 	],
 };

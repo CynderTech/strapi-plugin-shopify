@@ -22,4 +22,18 @@ export default ({ strapi }: { strapi: Strapi }) => ({
 
 		return data;
 	},
+	async retrieveOrders() {
+		const settings = await strapi
+			.store({ type: 'plugin', name: 'shopify', key: 'settings' })
+			.get();
+
+		instance.defaults.headers['X-Shopify-Access-Token'] =
+			settings.accessToken;
+
+		const data = await instance.get(
+			`${settings.baseUrl}/admin/orders.json`,
+		);
+
+		return data;
+	},
 });
