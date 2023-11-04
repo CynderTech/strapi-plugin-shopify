@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-shopify",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "This is the description of the plugin.",
   "strapi": {
     "name": "strapi-plugin-shopify",
